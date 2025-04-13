@@ -68,7 +68,7 @@ It is recommended to have your strategy class also implement `__str__`, so it
 appears in a human-readable way in scoring reports.
 
 You can see a simple strategy example in
-[`strategy/bayesian_random.py`](./strategy/bayesian_random.py).
+[`strategies/bayesian_random.py`](./strategies/bayesian_random.py).
 
 ## Scoring a strategy
 
