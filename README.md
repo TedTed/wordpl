@@ -43,6 +43,8 @@ Each round, the player can take one of two actions.
   - If the final guess is not the secret word, the player loses. Their score is
     +∞ (`float('inf')`).
 
+You can run `python interactive.py` to get an idea
+
 ## Implementing a strategy
 
 First, install some dependencies:
@@ -72,12 +74,19 @@ You can see a simple strategy example in
 
 ## Scoring a strategy
 
-To score your strategy, import it from `evaluate.py`, and add one or more
-instances of it to `STRATEGIES_UNDER_TEST`. Then, run `python evaluate.py`. The
-results are written to a CSV file stored in a `results` directory. Note that to
-make sure evaluation doesn't take too long, each game must terminate within 5
-seconds. Past this delay, we consider that the player has lost.
+To score your strategy, import it from `evaluate.py`, and add some instances of
+it to `STRATEGIES_UNDER_TEST`. Then, run `python evaluate.py`. The results are
+written to a CSV file stored in a `results` directory.
 
+If your strategy beats a high, send a PR to add it to this repo. I'll run it on
+my machine to confirm the score and add you to the leaderboard. Bonus points if
+you also write a blog post to explain your approach (I am happy to host it if
+that's convenient).
+
+Note that to make sure evaluation doesn't take too long, each game must
+terminate within 5 seconds. Past this delay, we consider that the player has
+lost. If this ends up being a significant factor in some strategies being better
+than others, I'll reconsider it.
 
 ## Acknowledgments
 
