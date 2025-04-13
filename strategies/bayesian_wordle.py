@@ -1,5 +1,8 @@
 # Choose the first clues based on an optimal Wordle solver.
-# If the solver doesn't return, choose randomly.
+# If the solver doesn't return, sample the next guess from the subjective
+# probability distribution, like bayesian_greedy.py.
+# Stop when the subjective probability of the answer being true exceeds the
+# certainty threshold.
 
 from dataclasses import dataclass
 

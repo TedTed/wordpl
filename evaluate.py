@@ -12,20 +12,11 @@ from strategies.bayesian_greedy import BayesianGreedy
 from strategies.bayesian_wordle import BayesianWordle
 
 # Instantiate it at most 3 times with different parameters here
-epsilons = [5+i for i in range(11)]
-certainties = [0.5, 0.6, 0.7, 0.8, 0.9]
-strategies_under_test = [
+STRATEGIES_UNDER_TEST = [
     BayesianWordle(eps, certainty)
-    for eps in epsilons
-    for certainty in certainties
+    for eps in [5+i for i in range(11)]
+    for certainty in [0.5, 0.6, 0.7, 0.8, 0.9]
 ]
-"""
-+ [
-    BayesianGreedy(eps, certainty)
-    for eps in epsilons
-    for certainty in certainties
-]
-"""
 
 NUM_TRIALS = 21
 TIMEOUT_DURATION = 5
@@ -161,7 +152,7 @@ if __name__ == "__main__":
     output_path = f"results/results-{time}.csv"
     with open(output_path, "a") as output:
         output.write("strategy;p05;p50;p95;timeouts\n")
-    for strat in strategies_under_test:
+    for strat in STRATEGIES_UNDER_TEST:
         print(f"Testing strategy {strat}…")
         (scores, p05, p50, p95, timeouts) = evaluate(strat, NUM_TRIALS)
         print(f"5th percentile: {p05}")
