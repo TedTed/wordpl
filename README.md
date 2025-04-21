@@ -18,6 +18,10 @@ The game and the strategy contest (with prizes!) is discussed in more detail in
 | 50th percentile | `BayesianWordle(epsilon=16, certainty=0.3)`  | 66.6         |
 | 95th percentile | `BayesianWordle(epsilon=30, certainty=0.7)`  | 153.9        |
 
+If you can find a strategy that improves one or more of these high scores by at
+least 5%, you win a Swiss chocolate bar 🍫 from my favorite chocolate shop in
+Zürich.
+
 ## Game rules
 
 The game selects a *secret word* at random among the words in `answers.txt`. The
@@ -47,7 +51,7 @@ Each round, the player can take one of two actions.
   - If the final guess is not the secret word, the player loses. Their score is
     +∞ (`float('inf')`).
 
-You can run `python interactive.py` to get an idea
+You can run `python interactive.py` to play this version of the game.
 
 ## Implementing a strategy
 
@@ -61,7 +65,8 @@ Then, create a new file in the `strategies` directory, and create a Python class
 that implements two methods:
 
 - `first_move(self)` must return a `(guess, epsilon)` pair, representing the
-  player's first move.
+  player's first move. `guess` must be a five-character word in `valid.txt`, and
+  `epsilon` must be a nonnegative number.
 - `next_move(guess, epsilon, result)` must return a `(next_guess, next_epsilon)`
   pair, representing the player's next move. The `guess` and `epsilon` arguments
   are the player's previous move; the third is the game's response for this
@@ -82,10 +87,10 @@ To score your strategy, import it from `evaluate.py`, and add some instances of
 it to `STRATEGIES_UNDER_TEST`. Then, run `python evaluate.py`. The results are
 written to a CSV file stored in a `results` directory.
 
-If your strategy beats a high, send a PR to add it to this repo. I'll run it on
-my machine to confirm the score and add you to the leaderboard. Bonus points if
-you also write a blog post to explain your approach (I am happy to host it if
-that's convenient).
+If your strategy beats a high score, send a PR to add it to this repo. I'll run
+it on my machine to confirm the score and add you to the leaderboard. Bonus
+points if you also write a blog post to explain your approach — I'm happy to
+host it if that's convenient for you.
 
 Note that to make sure evaluation doesn't take too long, each game must
 terminate within 5 seconds. Past this delay, we consider that the player has
