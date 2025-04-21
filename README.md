@@ -10,9 +10,13 @@ is to create a strategy that does this with sufficiently high probability.
 The game and the strategy contest (with prizes!) is discussed in more detail in
 [this blog post](https://desfontain.es/blog/wordpl.html).
 
-## Current leaderboard
+## Current best scores
 
-TODO
+| Type of score   | Strategy                                     | Total budget |
+| --------------- | -------------------------------------------- | ------------ |
+| 5th percentile  | `BayesianWordle(epsilon=11, certainty=0.02)` | 22.4         |
+| 50th percentile | `BayesianWordle(epsilon=16, certainty=0.3)`  | 66.6         |
+| 95th percentile | `BayesianWordle(epsilon=30, certainty=0.7)`  | 153.9        |
 
 ## Game rules
 

@@ -1,10 +1,12 @@
 from datetime import datetime
 import math
+from pathlib import Path
 import random
 import signal
 import sys
-from tqdm import trange
+
 import numpy as np
+from tqdm import trange
 
 # Add your new class here
 from strategies.bayesian_random import BayesianRandom
@@ -14,11 +16,11 @@ from strategies.bayesian_wordle import BayesianWordle
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
     BayesianWordle(eps, certainty)
-    for eps in [5+i for i in range(11)]
-    for certainty in [0.5, 0.6, 0.7, 0.8, 0.9]
+    for eps in [30]
+    for certainty in [0.6]
 ]
 
-NUM_TRIALS = 21
+NUM_TRIALS = 1001
 TIMEOUT_DURATION = 5
 
 with open("valid.txt", "r") as f:
@@ -59,7 +61,7 @@ def evaluate(strategy, num_trials, debug=False):
     """
     scores = []
     timeouts = 0
-    for _ in trange(num_trials):
+    for _ in trange(num_trials, smoothing=0):
         try:
             signal.signal(signal.SIGALRM, raise_timeout)
             signal.alarm(TIMEOUT_DURATION)
@@ -68,8 +70,7 @@ def evaluate(strategy, num_trials, debug=False):
             if e == timeout:
                 timeouts += 1
             else:
-                raise e
-                #print(f"Encountered exception {e}")
+                print(f"Encountered exception {e}")
             scores.append(float('inf'))
     if timeouts > 0:
         print(f"Evaluation timed out {timeouts} times")
@@ -85,7 +86,7 @@ def quantile(a, q):
     # numpy's quantile gets confused when there are infinity values. So we
     # convert all of them to a very large float, and then convert back very
     # large values to infinity.
-    r = np.quantile([sys.float_info.max if math.isinf(x) else x for x in a])
+    r = np.quantile([sys.float_info.max if math.isinf(x) else x for x in a], q)
     if r > sys.float_info.max/100:
         return float('inf')
     return r
