@@ -9,15 +9,13 @@ import numpy as np
 from tqdm import trange
 
 # Add your new class here
-from strategies.bayesian_random import BayesianRandom
-from strategies.bayesian_greedy import BayesianGreedy
 from strategies.bayesian_wordle import BayesianWordle
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-    BayesianWordle(eps, certainty)
-    for eps in [30]
-    for certainty in [0.6]
+    BayesianWordle(epsilon=11, certainty=0.02),
+    BayesianWordle(epsilon=16, certainty=0.3),
+    BayesianWordle(epsilon=30, certainty=0.7),
 ]
 
 NUM_TRIALS = 1001
