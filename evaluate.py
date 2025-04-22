@@ -9,16 +9,16 @@ import numpy as np
 from tqdm import trange
 
 # Add your new class here
-from strategies.bayesian_wordle import BayesianWordle
+from strategies.bayesian_easy import BayesianWordleEasy
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-    BayesianWordle(epsilon=11, certainty=0.02),
-    BayesianWordle(epsilon=16, certainty=0.3),
-    BayesianWordle(epsilon=30, certainty=0.7),
+    BayesianWordleEasy(epsilon=10.5),
+    # BayesianWordle(epsilon=16, certainty=0.3),
+    # BayesianWordle(epsilon=30, certainty=0.7),
 ]
 
-NUM_TRIALS = 1001
+NUM_TRIALS = 10001
 TIMEOUT_DURATION = 5
 
 with open("valid.txt", "r") as f:

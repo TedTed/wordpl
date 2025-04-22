@@ -8,8 +8,16 @@ with open("valid.txt", "r") as f:
 with open("answers.txt", "r") as f:
     answers = f.read().splitlines()
 
+with open("easy_words.txt", "r") as f:
+    easy_words = f.read().splitlines()
+
 def uniform_prior():
     prior = pd.DataFrame({"word": answers})
+    prior["weight"] = 1
+    return prior
+
+def uniform_prior_easy():
+    prior = pd.DataFrame({"word": easy_words})
     prior["weight"] = 1
     return prior
 
