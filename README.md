@@ -1,7 +1,7 @@
 # WORDPL — Strategy contest version
 
 This is a Python implementation of
-[WORDPL](https://www.oblivious.com/games/wordpl), a variant of
+[WORDPL](https://games.oblivious.com/games/wordpl), a variant of
 [Wordle](https://www.nytimes.com/games/wordle/index.html) developed by the team
 at [Oblivious](https://www.oblivious.com/). The goal of each game is to find the
 secret word with the smallest possible privacy budget. The goal of the contest
