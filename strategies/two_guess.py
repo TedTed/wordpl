@@ -13,7 +13,7 @@ from tqdm import tqdm
 MAGIC_WORD = "trace"
 
 @dataclass
-class Birdie:
+class TwoGuess:
     epsilon: float
 
     def first_move(self):
