@@ -10,10 +10,11 @@ from tqdm import trange
 
 # Add your new class here
 from strategies.bayesian_wordle import BayesianWordle
+from strategies.two_guess import TwoGuess
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-    BayesianWordle(epsilon=11, certainty=0.02),
+    TwoGuess(epsilon=17.9),
     BayesianWordle(epsilon=16, certainty=0.3),
     BayesianWordle(epsilon=30, certainty=0.7),
 ]
