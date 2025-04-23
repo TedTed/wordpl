@@ -12,11 +12,16 @@ The game and the strategy contest (with prizes!) is discussed in more detail in
 
 ## Current best scores
 
-| Type of score   | Strategy                                     | Total budget |
-| --------------- | -------------------------------------------- | ------------ |
-| 5th percentile  | `BayesianWordle(epsilon=11, certainty=0.02)` | 22.4         |
-| 50th percentile | `BayesianWordle(epsilon=16, certainty=0.3)`  | 66.6         |
-| 95th percentile | `BayesianWordle(epsilon=30, certainty=0.7)`  | 153.9        |
+| Type of score   | Strategy                                           | Author              | Total budget |
+| --------------- | -------------------------------------------------- | ------------------- | ------------ |
+| 5th percentile  | [`TwoGuess(epsilon=17.9)`][tg]                     | [@marcpare][marc]   | 17.9         |
+| 50th percentile | [`BayesianWordle(epsilon=16, certainty=0.3)`][bw]  | [@TedTed][ted]      | 66.6         |
+| 95th percentile | [`BayesianWordle(epsilon=30, certainty=0.7)`][bw]  | [@TedTed][ted]      | 153.9        |
+
+[tg]: ./strategies/two_guess.py
+[bw]: ./strategies/bayesian_wordle.py
+[marc]: https://github.com/marcpare
+[ted]: https://github.com/TedTed
 
 If you can find a strategy that improves one or more of these high scores by at
 least 5%, you win a Swiss chocolate bar 🍫 from my favorite chocolate shop in
@@ -50,6 +55,13 @@ Each round, the player can take one of two actions.
     sum of all the `epsilon` values used in previous rounds.
   - If the final guess is not the secret word, the player loses. Their score is
     +∞ (`float('inf')`).
+
+> [!NOTE]
+> When a guess has repeated letters, the behavior of this version of the game is
+> slightly different from the original Wordle, and from Oblivious' version. The
+> discrepancy is described in [this issue][issue].
+
+[issue]: https://github.com/TedTed/wordpl/issues/2
 
 You can run `python interactive.py` to play this version of the game.
 
