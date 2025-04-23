@@ -9,7 +9,7 @@ import numpy as np
 from tqdm import trange
 
 # Add your new class here
-from strategies.birdie import Birdie
+from strategies.bayesian_wordle import BayesianWordle
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
