@@ -51,6 +51,13 @@ Each round, the player can take one of two actions.
   - If the final guess is not the secret word, the player loses. Their score is
     +∞ (`float('inf')`).
 
+> [!NOTE]
+> When a guess has repeated letter, the behavior of this version of the game is
+> slightly different from the original Wordle, and from Oblivious' version. The
+> discrepancy is described in [this issue][issue]
+
+[issue]: https://github.com/TedTed/wordpl/issues/2
+
 You can run `python interactive.py` to play this version of the game.
 
 ## Implementing a strategy
