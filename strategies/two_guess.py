@@ -1,5 +1,3 @@
-
-
 # The guess of "trace" solves in 2 guesses 6.48% of the time with perfect clues.
 # So, we allocate all the privacy budget to this first guess, then make a best effort on the second guess
 
@@ -57,7 +55,7 @@ class TwoGuess:
 
 
 if __name__ == "__main__":
-    
+
     trials = 1000
     epsilon = 17.85
     score = 0
