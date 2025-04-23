@@ -10,12 +10,14 @@ from tqdm import trange
 
 # Add your new class here
 from strategies.bayesian_easy import BayesianWordleEasy
+from strategies.birdie import Birdie
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
+    Birdie(epsilon=19.0),
+
     BayesianWordleEasy(epsilon=10.5),
-    # BayesianWordle(epsilon=16, certainty=0.3),
-    # BayesianWordle(epsilon=30, certainty=0.7),
+
 ]
 
 NUM_TRIALS = 10001
