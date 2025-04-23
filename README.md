@@ -54,7 +54,7 @@ Each round, the player can take one of two actions.
 > [!NOTE]
 > When a guess has repeated letter, the behavior of this version of the game is
 > slightly different from the original Wordle, and from Oblivious' version. The
-> discrepancy is described in [this issue][issue]
+> discrepancy is described in [this issue][issue].
 
 [issue]: https://github.com/TedTed/wordpl/issues/2
 
