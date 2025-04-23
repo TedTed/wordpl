@@ -16,11 +16,6 @@ def uniform_prior():
     prior["weight"] = 1
     return prior
 
-def uniform_prior_easy():
-    prior = pd.DataFrame({"word": easy_words})
-    prior["weight"] = 1
-    return prior
-
 def update_prior(prior, guess, epsilon, clues):
     for index, clue in enumerate(clues):
         prior["weight"] = prior.apply(

@@ -1,6 +1,6 @@
 
 
-# The guess of "trace" solves in 2 guess 6.47% of the time
+# The guess of "trace" solves in 2 guesses 6.48% of the time with perfect clues.
 # So, we allocate all the privacy budget to this first guess, then make a best effort on the second guess
 
 # Return a word that is 100% consistent with the clue if possible, otherwise the word with the least
