@@ -15,19 +15,9 @@ from strategies.n_guess import NGuess
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-
-    # Beats 5th percentile
-    NGuess(epsilon=7.8, G=3),
-
-    # Beats 50th percentile
-    NGuess(epsilon=24, G=3),
-
-    # Beats 95th percentile
-    NGuess(epsilon=34, G=4),
-
-    # TwoGuess(epsilon=17.9),
-    # BayesianWordle(epsilon=16, certainty=0.3),
-    # BayesianWordle(epsilon=30, certainty=0.7),
+    NGuess(epsilon=7.8, G=3), # Targets 5th percentile
+    NGuess(epsilon=24, G=3), # Targets 50th percentile
+    NGuess(epsilon=34, G=4), # Targets 95th percentile
 ]
 
 NUM_TRIALS = 10001
