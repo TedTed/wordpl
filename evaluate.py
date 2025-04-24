@@ -9,8 +9,6 @@ import numpy as np
 from tqdm import trange
 
 # Add your new class here
-from strategies.bayesian_wordle import BayesianWordle
-from strategies.two_guess import TwoGuess
 from strategies.n_guess import NGuess
 
 # Instantiate it at most 3 times with different parameters here
