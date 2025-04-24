@@ -9,17 +9,16 @@ import numpy as np
 from tqdm import trange
 
 # Add your new class here
-from strategies.bayesian_wordle import BayesianWordle
-from strategies.two_guess import TwoGuess
+from strategies.n_guess import NGuess
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-    TwoGuess(epsilon=17.9),
-    BayesianWordle(epsilon=16, certainty=0.3),
-    BayesianWordle(epsilon=30, certainty=0.7),
+    NGuess(epsilon=7.8, G=3), # Targets 5th percentile
+    NGuess(epsilon=24, G=3), # Targets 50th percentile
+    NGuess(epsilon=34, G=4), # Targets 95th percentile
 ]
 
-NUM_TRIALS = 1001
+NUM_TRIALS = 10001
 TIMEOUT_DURATION = 5
 
 with open("valid.txt", "r") as f:
@@ -103,6 +102,7 @@ def evaluate_once(strategy, debug=False, end_message=False):
     whether the player won or lost.
     """
     answer = random.choice(answers)
+
     if debug:
         print(f"Real answer: '{answer}'")
     guess, epsilon = strategy.first_move()

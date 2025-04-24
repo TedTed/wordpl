@@ -12,16 +12,14 @@ The game and the strategy contest (with prizes!) is discussed in more detail in
 
 ## Current best scores
 
-| Type of score   | Strategy                                           | Author              | Total budget |
-| --------------- | -------------------------------------------------- | ------------------- | ------------ |
-| 5th percentile  | [`TwoGuess(epsilon=17.9)`][tg]                     | [@marcpare][marc]   | 17.9         |
-| 50th percentile | [`BayesianWordle(epsilon=16, certainty=0.3)`][bw]  | [@TedTed][ted]      | 66.6         |
-| 95th percentile | [`BayesianWordle(epsilon=30, certainty=0.7)`][bw]  | [@TedTed][ted]      | 153.9        |
+| Type of score   | Strategy                         | Author            | Total budget |
+| --------------- | ---------------------------------| ----------------- | ------------ |
+| 5th percentile  | [`NGuess(epsilon=7.8, G=3)`][ng] | [@marcpare][marc] | 15.6         |
+| 50th percentile | [`NGuess(epsilon=24, G=3)`][ng]  | [@marcpare][marc] | 48.0         |
+| 95th percentile | [`NGuess(epsilon=34, G=4)`][ng]  | [@marcpare][marc] | 102.0        |
 
-[tg]: ./strategies/two_guess.py
-[bw]: ./strategies/bayesian_wordle.py
+[ng]: ./strategies/n_guess.py
 [marc]: https://github.com/marcpare
-[ted]: https://github.com/TedTed
 
 If you can find a strategy that improves one or more of these high scores by at
 least 5%, you win a Swiss chocolate bar 🍫 from my favorite chocolate shop in
