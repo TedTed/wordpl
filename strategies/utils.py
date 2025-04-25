@@ -24,12 +24,14 @@ def update_prior(prior, guess, epsilon, clues):
 
 # Check whether a given clue is consistent with a word.
 def is_consistent(word, index, letter, clue):
-    if clue == ' ':
+    if clue == '.':
         return letter not in word
     if clue == 'i':
         return letter in word and word[index] != letter
     if clue == 'c':
         return word[index] == letter
+    else:
+        raise ValueError(f"Invalid clue '{clue}' for letter '{letter}' at index {index} in word '{word}'")
 
 # Updates the weight associated with a word based on a clue
 def update_weight(row, index, letter, clue, epsilon):
