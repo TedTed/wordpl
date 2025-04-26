@@ -78,11 +78,10 @@ class MaxClueEntropy:
             else:
                 js = np.arange(len(SOLUTION_LIST))
                 weights = np.ones(len(SOLUTION_LIST), dtype=np.float64)
-            for j in js:
-                clue = self.clue_matrix[i, j]
-                n_flipss = self.dist_matrix[clue, :]
-                flip_probs = flip_prob(n_flipss, epsilon=self.epsilon_per_guess)
-                clue_probs[i] += self.prob_s[j] * flip_probs * weights[j]
+            clues = self.clue_matrix[i, js]
+            n_flipss = self.dist_matrix[clues, :]
+            flip_probs = flip_prob(n_flipss, epsilon=self.epsilon_per_guess)
+            clue_probs[i, :] += np.sum(self.prob_s[js, np.newaxis] * flip_probs * weights[js, np.newaxis], axis=0)
         entropies = -np.sum(clue_probs * np.log(clue_probs), axis=1)
         argmax = np.nanargmax(entropies)
         guess = GUESS_LIST[argmax]
