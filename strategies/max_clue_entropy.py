@@ -13,15 +13,20 @@ from strategies.utils import valid, answers, is_consistent
 
 GUESS_LIST = sorted(valid)
 SOLUTION_LIST = sorted(answers)
+SOLUTION_SET = set(SOLUTION_LIST)
 N_CLUES = 3**5
 
 
 class MaxClueEntropy:
-    def __init__(self, n_guesses: int, epsilon_per_guess: float, monte_carlo: Optional[int] = None):
+    def __init__(self, n_guesses: int, epsilon_per_guess: float, monte_carlo: Optional[int] = None,
+                 first_guess: Optional[str] = None, hard_mode: bool = False, jitter: Optional[float] = None):
         # Params
         self.total_guesses = n_guesses
         self.epsilon_per_guess = epsilon_per_guess
         self.monte_carlo = monte_carlo
+        self.first_guess = first_guess
+        self.hard_mode = hard_mode
+        self.jitter = jitter
         
         # Constants
         self.clue_matrix = precompute_clue_matrix(cache='cache/clue_matrix.npy')
@@ -30,19 +35,31 @@ class MaxClueEntropy:
         for i in range(N_CLUES):
             self.all_clue_vecs[i] = clue_to_vec(i)
 
-        # Variables
+        # State
+        if jitter is not None:
+            self.jitter_factor = np.random.uniform(1. - jitter, 1. + jitter)
+        else:
+            self.jitter_factor = 1.
         self.remaining_guesses = n_guesses
         self.prob_s = np.zeros(len(SOLUTION_LIST), dtype=np.float64)
         self.prob_s[:] = 1. / len(SOLUTION_LIST)
 
     def first_move(self) -> tuple[str, float]:
+        # Reset the state
         self.prob_s[:] = 1. / len(SOLUTION_LIST)
         self.remaining_guesses = self.total_guesses
+        if self.jitter is not None:
+            self.jitter_factor = np.random.uniform(1. - self.jitter, 1. + self.jitter)
+        
+        if self.first_guess:
+            return self.first_guess, self.epsilon_per_guess * self.jitter_factor
         return self._regular_move()
 
     def next_move(self, guess, epsilon, clues):
+        # Update the state
         self._update_p_s(guess, clues, epsilon)
         self.remaining_guesses -= 1
+
         if self.remaining_guesses == 0:
             argmax = np.argmax(self.prob_s)
             return SOLUTION_LIST[argmax], 0
@@ -51,7 +68,10 @@ class MaxClueEntropy:
     def _regular_move(self) -> tuple[str, float]:
         clue_probs = np.zeros((len(GUESS_LIST), N_CLUES), dtype=np.float64)
         clue_probs[:] = 1e-10
-        for i, _ in enumerate(GUESS_LIST):
+        for i, guess in enumerate(GUESS_LIST):
+            if self.hard_mode and guess not in SOLUTION_SET:
+                clue_probs[i, :] = np.nan
+                continue
             if self.monte_carlo:
                 js = np.random.choice(len(SOLUTION_LIST), size=self.monte_carlo, p=self.prob_s)
                 weights = 1. / (self.monte_carlo * self.prob_s)
@@ -64,9 +84,9 @@ class MaxClueEntropy:
                 flip_probs = flip_prob(n_flipss, epsilon=self.epsilon_per_guess)
                 clue_probs[i] += self.prob_s[j] * flip_probs * weights[j]
         entropies = -np.sum(clue_probs * np.log(clue_probs), axis=1)
-        argmax = np.argmax(entropies)
+        argmax = np.nanargmax(entropies)
         guess = GUESS_LIST[argmax]
-        return guess, self.epsilon_per_guess
+        return guess, self.epsilon_per_guess * self.jitter_factor
     
     def _update_p_s(self, guess: str, clue: str, epsilon: float):
         """Update the solution distribution given the guess and clue."""
@@ -114,9 +134,10 @@ def precompute_distance_matrix() -> np.ndarray:
 
 
 def flip_prob(n_flips: int, epsilon: float) -> float:
-    """The probability of flipping n clues for a given epsilon."""
-    p_flip = 2./ (2. + np.exp(epsilon / 5.))
-    p_no_flip = 1. - p_flip
+    """The probability of observing a noisy clue that differs by n_flip entries from the true clue,
+    for a given epsilon."""
+    p_flip = 1./ (2. + np.exp(epsilon / 5.))
+    p_no_flip = (1. - 2. * p_flip)  # there are two flip outcomes. Only one of them is the observed one.
     return p_flip**n_flips * p_no_flip**(5. - n_flips)
 
 
