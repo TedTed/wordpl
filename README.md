@@ -12,14 +12,16 @@ The game and the strategy contest (with prizes!) is discussed in more detail in
 
 ## Current best scores
 
-| Type of score   | Strategy                         | Author            | Total budget |
-| --------------- | ---------------------------------| ----------------- | ------------ |
-| 5th percentile  | [`NGuess(epsilon=7.8, G=3)`][ng] | [@marcpare][marc] | 15.6         |
-| 50th percentile | [`NGuess(epsilon=24, G=3)`][ng]  | [@marcpare][marc] | 48.0         |
-| 95th percentile | [`NGuess(epsilon=34, G=4)`][ng]  | [@marcpare][marc] | 102.0        |
+| Type of score   | Strategy                                                                      | Author                 | Total budget |
+| --------------- | ----------------------------------------------------------------------------- | ---------------------- | ------------ |
+| 5th percentile  | [`NGuess(epsilon=7.8, G=3)`][ng]                                              | [@marcpare][marc]      | 15.6         |
+| 50th percentile | [`MaxClueEntropy(n_guesses=3, epsilon_per_guess=13.0, monte_carlo=200)`][mce] | [@DarthPumpkin][darth] | 39.0         |
+| 95th percentile | [`MaxClueEntropy(n_guesses=3, epsilon_per_guess=32.0, monte_carlo=200)`][mce] | [@DarthPumpkin][darth] | 96.0         |
 
 [ng]: ./strategies/n_guess.py
+[mce]: ./strategies/max_clue_entropy.py
 [marc]: https://github.com/marcpare
+[darth]: https://github.com/DarthPumpkin
 
 If you can find a strategy that improves one or more of these high scores by at
 least 5%, you win a Swiss chocolate bar 🍫 from my favorite chocolate shop in

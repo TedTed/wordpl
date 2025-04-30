@@ -10,16 +10,17 @@ from tqdm import trange
 
 # Add your new class here
 from strategies.n_guess import NGuess
+from strategies.max_clue_entropy import MaxClueEntropy
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-    NGuess(epsilon=7.8, G=3), # Targets 5th percentile
-    NGuess(epsilon=24, G=3), # Targets 50th percentile
-    NGuess(epsilon=34, G=4), # Targets 95th percentile
+    NGuess(epsilon=7.8, G=3), # Current best for 5th percentiel
+    MaxClueEntropy(n_guesses=3, epsilon_per_guess=13., monte_carlo=200),  # Current best for 50th percentile
+    MaxClueEntropy(n_guesses=3, epsilon_per_guess=32., monte_carlo=200),  # Current best for 95th percentile
 ]
 
-NUM_TRIALS = 10001
-TIMEOUT_DURATION = 5
+NUM_TRIALS = 1001
+TIMEOUT_DURATION = 10
 
 with open("valid.txt", "r") as f:
     valid = set(f.read().splitlines())
