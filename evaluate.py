@@ -11,11 +11,14 @@ from tqdm import trange
 # Add your new class here
 from strategies.g3 import G3
 from strategies.max_clue_entropy import MaxClueEntropy
+from strategies.d95 import D95
+
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
     G3(epsilon1=9.3, epsilon2=5.3), # Current best for 5th percentile
     MaxClueEntropy(n_guesses=3, epsilon_per_guess=13., monte_carlo=200),  # Current best for 50th percentile
-    MaxClueEntropy(n_guesses=3, epsilon_per_guess=32., monte_carlo=200),  # Current best for 95th percentile
+    D95(epsilon=27.0) # Current best for 95th percentile
+
 ]
 
 NUM_TRIALS = 1001
@@ -141,6 +144,7 @@ def evaluate_once(strategy, debug=False, end_message=False):
             print(f"Final guess '{guess}' is correct! :D")
             print(f"Used a total epsilon of '{total_epsilon}'.")
         return total_epsilon
+
     if debug or end_message:
         print(f"Final guess '{guess}' is incorrect =(")
         print(f"True answer was '{answer}'.")
