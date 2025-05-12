@@ -11,12 +11,15 @@ from tqdm import trange
 # Add your new class here
 from strategies.bayesian_wordle import BayesianWordle
 from strategies.two_guess import TwoGuess
+from strategies.d95 import D95
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
-    TwoGuess(epsilon=17.9),
-    BayesianWordle(epsilon=16, certainty=0.3),
-    BayesianWordle(epsilon=30, certainty=0.7),
+    # TwoGuess(epsilon=17.9),
+    # BayesianWordle(epsilon=16, certainty=0.3),
+    # BayesianWordle(epsilon=30, certainty=0.7),
+
+    D95(epsilon=27.0)
 ]
 
 NUM_TRIALS = 1001
@@ -141,6 +144,7 @@ def evaluate_once(strategy, debug=False, end_message=False):
             print(f"Final guess '{guess}' is correct! :D")
             print(f"Used a total epsilon of '{total_epsilon}'.")
         return total_epsilon
+
     if debug or end_message:
         print(f"Final guess '{guess}' is incorrect =(")
         print(f"True answer was '{answer}'.")
