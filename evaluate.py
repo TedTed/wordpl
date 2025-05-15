@@ -10,15 +10,13 @@ from tqdm import trange
 
 # Add your new class here
 from strategies.g3 import G3
-from strategies.max_clue_entropy import MaxClueEntropy
 from strategies.d95 import D95
 
 # Instantiate it at most 3 times with different parameters here
 STRATEGIES_UNDER_TEST = [
     G3(epsilon1=9.3, epsilon2=5.3), # Current best for 5th percentile
-    MaxClueEntropy(n_guesses=3, epsilon_per_guess=13., monte_carlo=200),  # Current best for 50th percentile
-    D95(epsilon=27.0) # Current best for 95th percentile
-
+    D95(epsilon=12.3),
+    D95(epsilon=25.0),
 ]
 
 NUM_TRIALS = 1001
@@ -72,6 +70,8 @@ def evaluate(strategy, num_trials, debug=False):
                 timeouts += 1
             else:
                 print(f"Encountered exception {e}")
+                import traceback
+                traceback.print_exc()
             scores.append(float('inf'))
     if timeouts > 0:
         print(f"Evaluation timed out {timeouts} times")
