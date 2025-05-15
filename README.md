@@ -70,7 +70,7 @@ You can run `python interactive.py` to play this version of the game.
 First, install some dependencies:
 
 ```
-pip install numpy pandas tqdm
+pip install numpy pandas tqdm numba
 ```
 
 Then, create a new file in the `strategies` directory, and create a Python class
