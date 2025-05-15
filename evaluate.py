@@ -19,7 +19,7 @@ STRATEGIES_UNDER_TEST = [
     # BayesianWordle(epsilon=16, certainty=0.3),
     # BayesianWordle(epsilon=30, certainty=0.7),
 
-    # D95(epsilon=12.3),
+    D95(epsilon=12.3),
     D95(epsilon=25.0),
 ]
 
