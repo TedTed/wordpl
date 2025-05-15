@@ -19,7 +19,8 @@ STRATEGIES_UNDER_TEST = [
     # BayesianWordle(epsilon=16, certainty=0.3),
     # BayesianWordle(epsilon=30, certainty=0.7),
 
-    D95(epsilon=27.0)
+    # D95(epsilon=12.3),
+    D95(epsilon=25.0),
 ]
 
 NUM_TRIALS = 1001
@@ -73,6 +74,8 @@ def evaluate(strategy, num_trials, debug=False):
                 timeouts += 1
             else:
                 print(f"Encountered exception {e}")
+                import traceback
+                traceback.print_exc()
             scores.append(float('inf'))
     if timeouts > 0:
         print(f"Evaluation timed out {timeouts} times")
