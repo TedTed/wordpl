@@ -88,7 +88,7 @@ def compute_cwa(cache_filepath="data/cwa.txt"):
     """
     The clue for each valid word and answer, stored in a compact base 3 integer
 
-    cwa[guess_word][answer_word]: clue 
+    cwa[guess_word][answer_word]: clue
 
     """
 
@@ -150,7 +150,7 @@ class G3:
         if turn == 2:
             guess = strategy[self.clues[0]]
             self.guesses.append(guess)
-            return valid_words[guess], self.epsilon1
+            return valid_words[guess], self.epsilon2
         else:
             guess = best_final_guess(self.guesses[0], self.clues[0], self.guesses[1], self.clues[1])
             return answers[guess], 0

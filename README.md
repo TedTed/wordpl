@@ -14,11 +14,11 @@ The game and the strategy contest (with prizes!) is discussed in more detail in
 
 | Type of score   | Strategy                                                                      | Author                 | Total budget |
 | --------------- | ----------------------------------------------------------------------------- | ---------------------- | ------------ |
-| 5th percentile  | [`NGuess(epsilon=7.8, G=3)`][ng]                                              | [@marcpare][marc]      | 15.6         |
+| 5th percentile  | [`G3(epsilon1=9.3, epsilon2=5.3)`][ng]                                        | [@marcpare][marc]      | 15.6         |
 | 50th percentile | [`MaxClueEntropy(n_guesses=3, epsilon_per_guess=13.0, monte_carlo=200)`][mce] | [@DarthPumpkin][darth] | 39.0         |
 | 95th percentile | [`MaxClueEntropy(n_guesses=3, epsilon_per_guess=32.0, monte_carlo=200)`][mce] | [@DarthPumpkin][darth] | 96.0         |
 
-[ng]: ./strategies/n_guess.py
+[ng]: ./strategies/g3.py
 [mce]: ./strategies/max_clue_entropy.py
 [marc]: https://github.com/marcpare
 [darth]: https://github.com/DarthPumpkin
