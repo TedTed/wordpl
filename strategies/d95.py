@@ -57,7 +57,7 @@ def compute_cwa(cache_filepath="data/cwa.txt"):
     """
     The clue for each valid word and answer, stored in a compact base 3 integer
 
-    cwa[guess_word][answer_word]: clue 
+    cwa[guess_word][answer_word]: clue
 
     """
 

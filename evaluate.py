@@ -19,7 +19,7 @@ STRATEGIES_UNDER_TEST = [
     D95(epsilon=25.0),
 ]
 
-NUM_TRIALS = 1001
+NUM_TRIALS = 10001
 TIMEOUT_DURATION = 10
 
 with open("valid.txt", "r") as f:
