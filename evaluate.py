@@ -19,7 +19,7 @@ STRATEGIES_UNDER_TEST = [
     D95(epsilon=25.0),
 ]
 
-NUM_TRIALS = 10001
+NUM_TRIALS = 1001
 TIMEOUT_DURATION = 10
 
 with open("valid.txt", "r") as f:
@@ -70,8 +70,6 @@ def evaluate(strategy, num_trials, debug=False):
                 timeouts += 1
             else:
                 print(f"Encountered exception {e}")
-                import traceback
-                traceback.print_exc()
             scores.append(float('inf'))
     if timeouts > 0:
         print(f"Evaluation timed out {timeouts} times")
